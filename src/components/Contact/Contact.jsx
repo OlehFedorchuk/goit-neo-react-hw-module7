@@ -1,7 +1,13 @@
 import { FaUser, FaPhoneAlt } from "react-icons/fa";
 import clsx from "clsx";
 import css from "./Contact.module.css";
-const Contact = ({ data: { id, name, number }, onDelete }) => {
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsOps";
+const Contact = ({ data: { id, name, number } }) => {
+  const dispatch = useDispatch();
+  const handleDelete = (id) => {
+    dispatch(deleteContact(id));
+  };
   return (
     <div className={clsx(css.item)}>
       <div className={clsx(css.info)}>
@@ -14,7 +20,7 @@ const Contact = ({ data: { id, name, number }, onDelete }) => {
           <address>{number}</address>
         </div>
       </div>
-      <button onClick={() => onDelete(id)}>Delete</button>
+      <button onClick={() => handleDelete(id)}>Delete</button>
     </div>
   );
 };

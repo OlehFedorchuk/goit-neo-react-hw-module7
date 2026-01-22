@@ -12,8 +12,8 @@ const initialState = {
 };
 
 export const selectContacts = (state) => state.contacts.items;
-export const selectLoading = (state) => state.loading;
-export const selectError = (state) => state.error;
+export const selectLoading = (state) => state.contacts.loading;
+export const selectError = (state) => state.contacts.error;
 
 const contactsSlice = createSlice({
   name: "contacts",
@@ -25,7 +25,6 @@ const contactsSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
-        console.log("Redux payload:", action.payload);
         state.loading = false;
         state.items = action.payload;
       })

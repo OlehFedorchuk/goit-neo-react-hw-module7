@@ -3,6 +3,7 @@ import clsx from "clsx";
 import css from "./ContactList.module.css";
 import Contact from "../Contact/Contact";
 import {
+  selectError,
   selectFilteredContacts,
   selectLoading,
 } from "../../redux/contactsSlice";
@@ -10,13 +11,18 @@ import {
 const ContactList = () => {
   const filteredContacts = useSelector(selectFilteredContacts);
   const loading = useSelector(selectLoading);
+  const error = useSelector(selectError);
 
-  console.log("loading", loading);
   return (
     <ul className={clsx(css.list)}>
       {loading && (
         <li>
           <p>Loading...</p>
+        </li>
+      )}
+      {error && (
+        <li>
+          <p>{error}</p>
         </li>
       )}
       {filteredContacts.map((contact) => (

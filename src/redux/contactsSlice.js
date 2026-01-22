@@ -52,9 +52,9 @@ const contactsSlice = createSlice({
           (contact) => contact.id !== action.payload.id,
         );
       })
-      .addCase(deleteContact.rejected, (state) => {
+      .addCase(deleteContact.rejected, (state, actions) => {
         state.loading = false;
-        state.error = true;
+        state.error = actions.payload;
       });
   },
 });
